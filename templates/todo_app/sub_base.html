@@ -1,0 +1,12 @@
+{% extends '../base.html' %}
+    <div>
+        <h1 onclick="location.href='{% url "todo_app:index" %}'">
+            Django To-do Lists
+        </h1>
+    </div>
+    <div>
+        {% block content %}
+        This content will be replaced by different html code for each page.
+        {% endblock %}
+    </div>
+<
