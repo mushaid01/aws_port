@@ -59,6 +59,18 @@ class CreatePostView(LoginRequiredMixin,CreateView):
     redirect_field_name='blog/post_detail.html'
     form_class=PostForm
     model=Post
+# @login_required
+# def CreatePostView(request,pk):
+#     post=get_object_or_404(Post,pk=pk)
+#     if request.method=="POST":
+#         form=PostForm(request.POST,request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('blog:post_detail',pk=post.pk)
+#     else:
+#             form=PostForm()
+#     return render(request,'blog/post_form.html',{'form':form})
+
 
 class PostUpdateView(LoginRequiredMixin,UpdateView):
     login_url='/login/'

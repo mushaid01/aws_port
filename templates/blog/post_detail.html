@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
+
 <h1 class="posttitle loader">{{ post.title }}</h1>
+
+
+    
+{% comment %} <h1>{{post.author}}</h1> {% endcomment %}
 
 {% if post.published_date %}
 <div class="date postdate">
@@ -10,10 +16,12 @@
 <a class="btn btn-default" href="{% url 'blog:post_publish' pk=post.pk %}">Publish</a>
     
 {% endif %}
-<p class="postcontent">{{ post.title|safe|linebreaksbr}}</p>
+{% comment %} <p class="postcontent">{{ post.title|safe|linebreaksbr}}</p> {% endcomment %}
+<p class="postcontent">{{ post.text|safe|linebreaksbr}}</p>
 
 
 {% if user.is_authenticated %}
+{% if user.is_superuser %}    
 <a class="btn btn-primary" href="{% url 'blog:post_edit' pk=post.pk %}">
 <span class="glyphicon glyphicon-pencil"></span>
 </a>
@@ -22,6 +30,8 @@
     <span class="glyphicon glyphicon-remove"></span>
 </a>
 {% endif %}
+{% endif %}
+
     <hr>
     <a class="btn btn-primary btn-comment" href="{% url 'blog:add_comment_to_post' pk=post.pk %}">Add Comment</a>
     
@@ -45,7 +55,7 @@
             
         {% endif %}
             <p>{{comment.text|safe|linebreaks}}</p>
-            <p>Posted By : {{comment.author}}</p>
+            {% comment %} <p>Posted By : {{comment.author}}</p> {% endcomment %}
             
         {% endif %}
             {% empty %}
@@ -73,5 +83,36 @@
 </form>
     </div>
     
+
+
+    {% comment %} <style>
+        .footer {
+           position: fixed;
+           left: 0;
+           bottom: 0;
+           width: 100%;
+           background-color: silver;
+           color: white;
+           text-align: center;
+        }
+        </style>
+    <div class="footer">
+        <p>
+            &copy
+            <script>
+               document.write(new Date().getFullYear());
+            </script> 
+            <a style="background-color:white ;" href="">Mir Mushaid</a>
+            <script>
+              fetch('http://worldclockapi.com/api/json/utc/now')
+              .then(data => data.json())
+              .then(d => 
+              document.getElementById('copyright').innerHTML = (new Date(d.currentDateTime).getFullYear())
+            )
+            </script>
+            <!-- <a href='https://twiter.com/saviour123>Saviour Gidi<a/> -->
+            </p>
+      </div> {% endcomment %}
+
 {% endblock content %}
 

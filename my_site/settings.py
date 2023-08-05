@@ -41,10 +41,14 @@ INSTALLED_APPS = [
     'accounts',
     'todo_app',
     'bootstrap3',
-    'ckeditor'
+    'ckeditor',
+    'contents',
+    'tinymce',
+    'taggit',
 ]
 
 MIDDLEWARE = [
+    # "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -123,10 +127,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+# if DEBUG:
 STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
+# else:
+# STATIC_ROOT=os.path.join(BASE_DIR,'static')
 
 LOGIN_REDIRECT_URL='/'
 LOGOUT_REDIRECT_URL='/'
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 

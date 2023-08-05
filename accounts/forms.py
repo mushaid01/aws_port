@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 
-from .models import photo
+
 
 class UserCreateForm(UserCreationForm):
     class Meta:
@@ -14,7 +14,3 @@ class UserCreateForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         self.fields['username'].label='Display Name'
         self.fields['email'].label='Email Address'
-class imageform(forms.ModelForm):
-    class Meta:
-        model=photo
-        fields='__all__'

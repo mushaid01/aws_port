@@ -54,7 +54,7 @@ class ItemCreate(CreateView):
         return context
 
     def get_success_url(self):
-        return reverse("list", args=[self.object.todo_list_id])
+        return reverse("todo_app:list", args=[self.object.todo_list_id])
 
 class ItemUpdate(UpdateView):
     model = ToDoItem
@@ -72,7 +72,7 @@ class ItemUpdate(UpdateView):
         return context
 
     def get_success_url(self):
-        return reverse("list", args=[self.object.todo_list_id])
+        return reverse("todo_app:list", args=[self.object.todo_list_id])
 class ListDelete(DeleteView):
     model = ToDoList
     # You have to use reverse_lazy() instead of reverse(),

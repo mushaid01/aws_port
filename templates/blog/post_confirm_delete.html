@@ -5,5 +5,38 @@
     <p>are you sure you want to delete {{object}}</p>
     <input class="btn btn-danger" type="submit" value="confirm">
 </form>
+  
+
+{% comment %} 
+<style>
+    .footer {
+       position: fixed;
+       left: 0;
+       bottom: 0;
+       width: 100%;
+       background-color: silver;
+       color: white;
+       text-align: center;
+    }
+    </style>
+<div class="footer">
+    <p>
+        &copy
+        <script>
+           document.write(new Date().getFullYear());
+        </script> 
+        <a style="background-color:white ;" href="">Mir Mushaid</a>
+        <script>
+          fetch('http://worldclockapi.com/api/json/utc/now')
+          .then(data => data.json())
+          .then(d => 
+          document.getElementById('copyright').innerHTML = (new Date(d.currentDateTime).getFullYear())
+        )
+        </script>
+        <!-- <a href='https://twiter.com/saviour123>Saviour Gidi<a/> -->
+        </p>
+  </div>
+   {% endcomment %}
+
 {% endblock content %}
 

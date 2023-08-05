@@ -1,6 +1,8 @@
 from django.urls import path
 from .import views
-
+from django.conf.urls.static import static
+from django.conf import settings
+from .views import CreatePostView
 app_name='blog'
 urlpatterns = [
     path('',views.PostListView.as_view(),name='post_list'),
@@ -16,3 +18,6 @@ urlpatterns = [
     path('post/<int:pk>/publish/',views.post_publish,name='post_publish'),
     path('like/<int:pk>',views.LikeView,name='like_post')
 ]
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,
+                              document_root=settings.MEDIA_ROOT)

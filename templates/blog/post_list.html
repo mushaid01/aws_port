@@ -1,20 +1,85 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-<div class="centerstage">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="{% static 'footer1.css' %}">
 
 
-    {% for post in post_list %}
-        <div class="post">
-
-            <h1><a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-            <div class="date">
-                <p>Published on: {{ post.published_date|date:"D M Y"}}</p>
+<div class="destinations" id="destinations">
+    <div class="container">
+    <div class="row">
+    <div  class="col text-center">
+    <div  class="section_subtitle">
+    Simply Amazing 
+    </div>
+    <div class="section_title">
+        <h2>Popular Blogs</h2>
+    </div>
+    
+    </div>
+    </div>
+    <div  class="row destinations_row">
+    <div class="col">
+    <div class="destinations_container item_grid">
+        {% for post in post_list %}
+        
+        {% if post.home %}
+          
+        
+          
+        <div class="destination item">
+            <div class="destination_title">
+                <a href="{% url 'blog:post_detail' pk=post.pk %}">{{post.title}}</a>
             </div>
+    <div class="destination_image">
+        <img src="{{post.image.url}}" alt="" ALIGN="left">
+        <!-- <div class="text"> -->
+         
+          <p>{{post.short_desc|safe|linebreaksbr}}</p>
+        <!-- </div> -->
+
+    </div>
+    <div class="destination_content">
+    <div class="card-footer">
+    <div class="row">
+    <div class="col">
+        <a href="{% url 'blog:post_detail' pk=post.pk %}" class="btn btn-primary">More</a>
+        <a href="{% url 'blog:post_detail' pk=post.pk %}" class="btn btn-primary"><i id="mark1" class="glyphicon glyphicon-bookmark" ></i></a>
+    
+    </div>
+    <div class="col">
+    <div class="text-right">
+        <button type="button" class="btn btn-outline-secondary">
+
             <a href="{% url 'blog:post_detail' pk=post.pk %}">Comments: {{ post.approve_comments.count }}</a>
-            <a href="{% url 'blog:post_detail' pk=post.pk %}">Likes: {{post.likes.count}}</a>
+           
+          </button>
+    
+          <button type="button" class="btn btn-outline-danger">
+
+                <a href="{% url 'blog:post_detail' pk=post.pk %}">Likes: {{post.likes.count}}</a>
+
+          </button>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
         </div>
-    {% endfor %}
-</div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+   
+
+
+
+
 {% endblock %}
 

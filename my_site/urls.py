@@ -19,13 +19,23 @@ from django.contrib import admin
 from django.urls import path,include
 from django.contrib.auth import views
 from django.contrib.auth.views import LoginView, logout_then_login, LogoutView
+# from django.conf.urls import url
+
+from django.conf import settings
+
+from django.views.static import serve
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('',include('blog.urls',namespace='blog')),
+    # url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+    # url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
+    path('admin_mirmushaid/', admin.site.urls),
+    path('blog/',include('blog.urls',namespace='blog')),
     path('todo_app/',include('todo_app.urls',namespace='todo_app')),
+    path('',include("contents.urls",namespace='contents')),
     path('',include('accounts.urls',namespace='accounts')),
     path('',include('django.contrib.auth.urls')),
+    path('tinymce/', include('tinymce.urls')),
+
 
 ]
 if settings.DEBUG:

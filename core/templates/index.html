@@ -1,0 +1,506 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    {% block meta %}
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}">
+    </script>
+    <script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+    <script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+    <script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+    <script src="{% static 'plugins/Isotope/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'plugins/scrollTo/jquery.scrollTo.min.js' %}"></script>
+    <script src="{% static 'plugins/easing/easing.js' %}"></script>
+    <script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    <!-- Required meta tags -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    {% comment %} <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> {% endcomment %}
+
+    {# MEDIUM STYLE EDITOR#}
+    <script src="//cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/medium-editor/latest/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>{% block head_title %} Home | Kash Bulletin {% endblock %}</title>
+    {% endblock %}
+    <!-- plugin css for this page -->
+    <link
+            rel="stylesheet"
+            href="{% static 'vendors/mdi/css/materialdesignicons.min.css' %}"
+    />
+    <link rel="stylesheet" href="{% static 'vendors/aos/dist/aos.css/aos.css' %}"/>
+    <link
+            rel="stylesheet"
+            href="{% static 'vendors/owl.carousel/dist/assets/owl.carousel.min.css' %}"
+    />
+    <link
+            rel="stylesheet"
+            href="{% static 'vendors/owl.carousel/dist/assets/owl.theme.default.min.css' %}"
+    />
+    <!-- End plugin css for this page -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}"/>
+    <!-- inject:css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- endinject -->
+
+</head>
+<style>
+    .a {
+        color: #1a1a1a;
+    }
+</style>
+
+<body>
+<div class="container-scroller">
+    <div class="main-panel">
+        <header id="header">
+            <div class="container">
+                <!-- partial:partials/_navbar.html -->
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <div class="d-flex justify-content-between align-items-center navbar-top">
+                        <ul class="navbar-left">
+                            <li id="date"></li>
+                            <!--                            <li>30°C,London</li>-->
+                        </ul>
+                        <div>
+                            <a class="navbar-brand" href="/"
+                             ><h2><a href="">Kash Bulletin</a></h2></a> 
+                        </div>
+                        <div class="d-flex">
+                            <ul class="navbar-right">
+                                <li>
+                                    <a href="#">ENGLISH</a>
+                                </li>
+                                <li>
+                                    <a href="#">HINDI</a>
+                                </li>
+                                <li>
+                                    <a href="#">URDU</a>
+                                </li>
+                            </ul>
+                            <ul class="social-media">
+                                <li>
+                                    <a href="{{seej.profile.instagram_url}}">
+                                        <i class="mdi mdi-instagram"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ seej.profile.github_url }}">
+                                        <i class="mdi mdi-github"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{seej.profile.youtube_url}}">
+                                        <i class="mdi mdi-youtube"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ seej.profile.linkedin_url }}">
+                                        <i class="mdi mdi-linkedin"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="mdi mdi-twitter"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="navbar-bottom-menu">
+                        <button
+                                class="navbar-toggler"
+                                type="button"
+                                data-target="#navbarSupportedContent"
+                                aria-controls="navbarSupportedContent"
+                                aria-expanded="false"
+                                aria-label="Toggle navigation"
+                        >
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div
+                                class="navbar-collapse justify-content-center collapse"
+                                id="navbarSupportedContent"
+                        >
+                            <ul
+                                    class="navbar-nav d-lg-flex justify-content-between align-items-center"
+                            >
+                                <li>
+                                    <button class="navbar-close">
+                                        <i class="mdi mdi-close"></i>
+                                    </button>
+                                </li>
+
+                                <li class="nav-item active">
+                                    <a class="nav-link active" href="{% url 'core:home' %}">Home</a>
+                                </li>
+                                <li><a style="color: black ;" href="{% url 'blog:post_list' %}">Blog</a></li>
+                                {% for menu in menu_category %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ menu.slug }}">{{ menu.title }}</a>
+                                </li>
+                                {% endfor %}
+                                <li class="nav-item">
+                                    <form name='search' class="d-flex" onsubmit="required()"
+                                          action="{% url 'core:search' %}" method="get">
+                                        <input name="q" type="search" placeholder="Search news" aria-label="Search"
+                                               style="width:60%; border: 1px solid #000;">
+                                        <button class="search_button" type="submit"><i class="mdi mdi-magnify"></i>
+                                        </button>
+                                    </form>
+                                </li>
+                               
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- partial -->
+            </div>
+        </header>
+        {% block content %}
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="owl-carousel owl-theme" id="main-banner-carousel">
+                        {% comment %} {% for slider in slider_news %}
+                        <div class="item">
+                            <div class="carousel-content-wrapper mb-2">
+                                <div class="carousel-content">
+                                    <h1 class="font-weight-bold">
+                                        {{ slider.title }}
+                                    </h1>
+
+                                    <p class="text-color m-0 pt-2 d-flex align-items-center">
+                                        <span class="fs-10 mr-1">{{ slider.created_at|date}}</span>
+                                        <i class="mdi mdi-clock-outline mr-3"></i>
+                                        <span class="fs-10 mr-1">{{ slider.main_category }}</span>
+                                        <i class="mdi mdi-bookmark-outline "></i>
+                                    </p> 
+                                </div>
+                                <div class="carousel-image">
+                                    <img src="{{ slider.content_image.url}}" alt="{{ slider.title}}" loading="lazy"
+                                         style="max-width: 100%"/>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %} {% endcomment %}
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    {% for six in six_news %}
+                
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="py-3 border-bottom"> 
+                                <div class="d-flex align-items-center pb-2">
+
+                                    <span class="fs-12 text-muted">{{six.main_category}}</span>
+                                </div>
+
+                                <p class="fs-14 m-0 font-weight-medium line-height-sm">
+                                    <img src="{{six.content_image.url}}" alt="{{six.title}}" style="max-width: 20px;"
+                                         loading="lazy">
+                                    <a href="{% url 'core:news-detail' six.slug %}">{{ six.title }}</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div> 
+                    
+                    {% endfor %}  
+
+                </div>
+            </div>
+            <div class="world-news">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="d-flex position-relative  float-left">
+                            <h3 class="section-title">World News</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for world in world_news %}
+                    {% if forloop.counter == 1 %}
+                    <div class="col-lg-3 col-sm-6 grid-margin mb-5 mb-sm-2">
+                        {% else %}
+                        <div class="col-lg-3 col-sm-6 mb-5 mb-sm-2">
+                            {% endif %}
+                            <div class="position-relative image-hover">
+                                <img
+                                        src="{{world.content_image.url}}"
+                                        class="img-fluid" loading="lazy"
+                                        alt="{{world.image_caption}}"
+                                />
+                                <span class="thumb-title">{{ world.image_caption}}</span>
+                            </div>
+                            <h5 class="font-weight-bold mt-3">
+                                {{ world.title }}
+                            </h5>
+                            <p class="fs-15 font-weight-normal">
+                                {{ world.quote_text|slice:'100'}} ...
+                            </p>
+                            <a href="/news/{{world.slug}}" class="font-weight-bold text-dark pt-2"
+                            >Read More</a
+                            >
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+                </div>
+                
+                <div class="editors-news">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="d-flex position-relative float-left">
+                                <h3 class="section-title">Editor Choice</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-lg-6  mb-5 mb-sm-2">
+                            {% for ed1 in editor_choice_1 %}
+                            <div class="position-relative image-hover">
+                                <img src="{{ ed1.content_image.url }}" class="img-fluid" alt="world-news"
+                                     loading="lazy">
+                                <span class="thumb-title">NEWS</span>
+                            </div>
+                            <h1 class="font-weight-600 mt-3">
+                                <a href="{% url 'core:news-detail' ed1.slug %}">{{ ed1.title }}</a>
+                            </h1>
+                            <p class="fs-15 font-weight-normal">
+                                {{ ed1.quote_text|slice:'200'}} ...
+                            </p>
+                            {% endfor %}
+                        </div>
+                        <div class="col-lg-6  mb-5 mb-sm-2">
+                            <div class="row">
+                                {% for ed4 in editor_choice_4 %}
+                                <div class="col-sm-6  mb-5 mb-sm-2">
+                                    <div class="position-relative image-hover">
+                                        <img src="{{ ed4.content_image.url }}" class="img-fluid"
+                                             alt="world-news" loading="lazy">
+                                        <span class="thumb-title">POLITICS</span>
+                                    </div>
+                                    <h5 class="font-weight-600 mt-3">
+                                        <a href="{% url 'core:news-detail' ed4.slug %}">{{ ed4.title }}</a>
+                                    </h5>
+                                    <p class="fs-15 font-weight-normal">
+                                        {{ ed4.quote_text|slice:'50'}} ...
+                                    </p>
+                                </div>
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="popular-news">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="d-flex position-relative float-left">
+                                <h3 class="section-title">Popular News</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="row">
+                                {% for pop in popular_news %}
+                                <div class="col-sm-4  mb-5 mb-sm-2">
+                                    <div class="position-relative image-hover">
+                                        <img
+                                                src="{{ pop.content_image.url}}"
+                                                class="img-fluid"
+                                                alt="{{pop.image_caption}}" loading="lazy"
+                                        />
+                                        <span class="thumb-title">{{ pop.image_caption}}</span>
+                                    </div>
+                                    <h5 class="font-weight-600 mt-3">
+                                        <a href="{% url 'core:news-detail' pop.slug %}">{{ pop.title }}</a>
+                                    </h5>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="position-relative mb-3">
+                                <img
+                                        src="{% static 'images/dashboard/star-magazine-15.jpg' %}"
+                                        class="img-fluid" loading="lazy"
+                                        alt="world-news"
+                                />
+                                <div class="video-thumb text-muted">
+                                    <span><i class="mdi mdi-menu-right"></i></span>LIVE
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="d-flex position-relative float-left">
+                                        <h3 class="section-title">Latest News</h3>
+                                    </div>
+                                </div>
+                                {% for latest in latest_news %}
+                                <div class="col-sm-12">
+                                    <div class="border-bottom pb-3">
+                                        <h5 class="font-weight-600 mt-0 mb-0">
+                                            <a href="{% url 'core:news-detail' latest.slug %}">{{ latest.title }}</a>
+                                        </h5>
+                                        <p class="text-color m-0 d-flex align-items-center">
+                                            <span class="fs-10 mr-1">{{ latest.created_at|date }}</span>
+                                            <i class="mdi mdi-clock-outline mr-3"></i>
+                                            <span class="fs-10 mr-1">{{ latest.main_category}}</span>
+                                            <i class="mdi mdi-bookmark-outline"></i>
+                                        </p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endblock %}
+            <!-- main-panel ends -->
+            <!-- container-scroller ends -->
+
+            <!-- partial:partials/_footer.html -->
+            <footer>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="border-top"></div>
+                        </div>
+                        <div class="col-sm-3 col-lg-3">
+                            <ul class="footer-vertical-nav">
+                                <li class="menu-title"><a href="pages/news-post.html">News</a></li>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="pages/world.html">World</a></li>
+                                <li><a href="pages/author.html">Magazine</a></li>
+                                <li><a href="pages/business.html">Business</a></li>
+                                <li><a href="pages/politics.html">Politics</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-3 col-lg-3">
+                            <ul class="footer-vertical-nav">
+                                <li class="menu-title"><a href="pages/world.html">World</a></li>
+                                <li><a href="pages/sports.html">Sports</a></li>
+                                <li><a href="pages/art.html">Art</a></li>
+                                <li><a href="#">Magazine</a></li>
+                                <li><a href="pages/real-estate.html">Real estate</a></li>
+                                <li><a href="pages/travel.html">Travel</a></li>
+                                <li><a href="pages/author.html">Author</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-3 col-lg-3">
+                            <ul class="footer-vertical-nav">
+                                <li class="menu-title"><a href="#">Features</a></li>
+                                <li><a href="#">Photography</a></li>
+                                <li><a href="#">Video</a></li>
+                                <li><a href="pages/news-post.html">Newsletters</a></li>
+                                <li><a href="#">Live Events</a></li>
+                                <li><a href="#">Stores</a></li>
+                                <li><a href="#">Jobs</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-3 col-lg-3">
+                            <ul class="footer-vertical-nav">
+                                <li class="menu-title"><a href="#">More</a></li>
+                                <li><a href="#">RSS</a></li>
+                                <li><a href="#">FAQ</a></li>
+                                <li><a href="#">User Agreement</a></li>
+                                <li><a href="#">Privacy</a></li>
+                                <li><a href="pages/aboutus.html">About us</a></li>
+                                <li><a href="pages/contactus.html">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="d-flex justify-content-between">
+                                <h2><a href="{% url 'core:home' %}">Kash Bulletin</a></h2>
+
+                                <div class="d-flex justify-content-end footer-social">
+                                    <h5 class="m-0 font-weight-600 mr-3 d-none d-lg-flex">Follow on</h5>
+                                    <ul class="social-media">
+                                        <li>
+                                            <a href="{{ seej.profile.instagram_url }}">
+                                                <i class="mdi mdi-instagram"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ seej.profile.github_url }}">
+                                                <i class="mdi mdi-github"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ seej.profile.youtube_url }}">
+                                                <i class="mdi mdi-youtube"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ seej.profile.linkedin_url }}">
+                                                <i class="mdi mdi-linkedin"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="mdi mdi-twitter"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="d-lg-flex justify-content-between align-items-center border-top mt-5 footer-bottom">
+                                <ul class="footer-horizontal-menu">
+                                    {% for page in footer_pages %}
+                                    <li><a href="{% url 'core:page-detail' page.slug %}">{{ page.title }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                                <p class="font-weight-medium">
+                                    © 2022 <a href="{% url 'contents:home' %}" target="_blank" class="text-dark">@ Mir Mushaid
+                                    </a>, All Rights Reserved.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+            <!-- partial -->
+        </div>
+    </div>
+</div>
+<!-- inject:js -->
+<script src="{% static 'vendors/js/vendor.bundle.base.js' %}"></script>
+<!-- endinject -->
+<!-- plugin js for this page -->
+<script src="{% static 'vendors/owl.carousel/dist/owl.carousel.min.js' %}"></script>
+<!-- End plugin js for this page -->
+<!-- Custom js for this page-->
+<script src="{% static 'js/demo.js' %}"></script>
+<!-- End custom js for this page-->
+
+<script>
+    const d = new Date()
+    document.getElementById("date").innerHTML = d;
+</script>
+</body>
+</html>

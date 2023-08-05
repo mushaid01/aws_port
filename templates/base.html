@@ -2,42 +2,144 @@
 {% load static %}
 <html>
     <head>
+      
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
         <title>Blog Project</title>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+
+
+
+
+
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         {# MEDIUM STYLE EDITOR#}
         <script src="//cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"></script>
         <link rel="stylesheet" href="//cdn.jsdelivr.net/medium-editor/latest/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
-
-
         {# Custom CSS#}
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <link rel="stylesheet" href="{% static 'ft.css' %}">
+        <link rel="stylesheet" href="{% static 'footer1.css' %}">
+
 
         {# Fonts#}
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Russo+One" rel="stylesheet">
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+
+        <style>
+
+          body {
+            font-family: "Lato", sans-serif;
+          }
+          
+          .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+          }
+          
+          .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+          }
+          
+          .sidebar a:hover {
+            color: #f1f1f1;
+          }
+          
+          .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+          }
+          
+          .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color:black;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+          }
+          
+          .openbtn:hover {
+            background-color: #444;
+          }
+          
+          #main {
+            transition: margin-left .5s;
+            padding: 5px;
+            
+          }
+          
+          /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+          @media screen and (max-height: 450px) {
+            .sidebar {padding-top: 15px;}
+            .sidebar a {font-size: 18px;}
+          }
 
 
+          </style>
 
+    </head>
 
 <body class='loader'>
-
 
   <nav class="navbar navbar-default techfont custom-navbar">
     <div class="container">
 
+      <div id="mySidebar" class="sidebar">
+        
+
+        <ul>
+        <li><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a></li>
+        <li><a href="{% url 'contents:home' %}"><span class="glyphicon glyphicon-user"></span></a></li>
+        <li><a href="" target="blank"><i class="fa fa-instagram"></i></a></li>
+        <a href=""><i class="fa fa-linkedin"></i></a>
+        <a href="" target="_blank"><i class="fa fa-github"></i></a>
+        
+
+        </ul>
+
+      </div>
+
+      <script>
+        function openNav() {
+          document.getElementById("mySidebar").style.width = "250px";
+          document.getElementById("main").style.marginLeft = "250px";
+        }
+        
+        function closeNav() {
+          document.getElementById("mySidebar").style.width = "0";
+          document.getElementById("main").style.marginLeft= "0";
+        }
+        </script>
 
       <ul class="nav navbar-nav">
-        <li><a class='navbar-brand bigbrand' href="{% url 'blog:post_list' %}">My Tech blog</a></li>
-        
-        <li><a href="https://github.com/mushaid01">Github</a></li>
-        <li><a href="linkedin.com/in/mir-mushaid-9160271a2">LinkedIn</a></li>
-        
-        
+
+        <li id="main"><button class="openbtn" onclick="openNav()">☰</button></li>
+        <li><a class='navbar-brand bigbrand' href="{% url 'blog:post_list' %}">Kash Blog</a></li>
+        <li><a class='navbar-brand bigbrand' href="{% url 'contents:home' %}">Home</a></li>
         
 
       </ul>
@@ -56,7 +158,7 @@
         </li>
         
         <li>
-          <a href="/todo_app/">My Todos</a>
+          <a href="{% url 'todo_app:index' %}">My Todos</a>
         </li>
 
         <li>
@@ -70,27 +172,110 @@
       </ul>
   </div>
 </nav>
+
+
+
+
+
 <div class="container-fluid">
   
 </div>
   {# The actual blog posts#}
+  </div>
         <div class="content container">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-lg-6">
                   <div class="blog_posts">
+
                     {% block content %}
-                    
+
                     {% endblock %}
-
                   </div>
-
                 </div>
-            </div>
-        </div>
+
+              </div>
+        </div> 
 
 {# SCRIPTS#}
+<script src="//code.jivosite.com/widget/F4aLsjrQrN" async></script>								
 
-<script type="text/javascript" src="{% static 'js/blog.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/blog.js' %}"></script> 
+
+
+<div class="container">
+  <section style="height:80px;"></section>
+<div class="row" style="text-align:center;">
+  <!-- <h2>Bootstrap Dark Footer UI</h2> -->
+</div>
+  <!----------- Footer ------------>
+  <footer class="footer-bs">
+      <div class="row">
+        <div class="col-md-3 footer-brand animated fadeInLeft">
+            <h2>{{seej.profile.title}}</h2>
+              <p>Suspendisse hendrerit tellus laoreet luctus pharetra. Aliquam porttitor vitae orci nec ultricies. Curabitur vehicula, libero eget faucibus faucibus, purus erat eleifend enim, porta pellentesque ex mi ut sem.</p>
+              <p></p>
+          </div>
+        <div class="col-md-4 footer-nav animated fadeInUp">
+            <h4>Menu —</h4>
+            <div class="col-md-6">
+                  <ul class="pages">
+                      <li><a href="#">Travel</a></li>
+                      <li><a href="#">Nature</a></li>
+                      <li><a href="#">Explores</a></li>
+                      <li><a href="#">Science</a></li>
+                      <li><a href="#">Advice</a></li>
+                  </ul>
+              </div>
+            <div class="col-md-6">
+                  <ul class="list">
+                      <li><a href="#">About Us</a></li>
+                      <li><a href="#">Contacts</a></li>
+                      <li><a href="#">Terms & Condition</a></li>
+                      <li><a href="#">Privacy Policy</a></li>
+                  </ul>
+              </div>
+          </div>
+        <div class="col-md-2 footer-social animated fadeInDown">
+            <h4>Follow Us</h4>
+            <ul>
+              <li><a href="{{seej.profile.instagram_url}}"><i class="fa fa-instagram"></i>Instagram</a></li>
+              <li><a href="{{seej.profile.linkedin_url}}"><i class="fa fa-linkedin"></i>Linkedin</a></li>
+              <li><a href="{{seej.profile.github_url}}"><i class="fa fa-github"></i>Github</a></li>
+              </ul>
+          </div>
+        <div class="col-md-3 footer-ns animated fadeInRight">
+            <h4>Newsletter</h4>
+              <p>A rover wearing a fuzzy suit doesn’t alarm the real penguins</p>
+              <p>
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-envelope"></span></button>
+                    </span>
+                  </div><!-- /input-group -->
+               </p>
+          </div>
+      </div>
+  </footer>
+  <section style="text-align:center; margin:10px auto;"><p>
+    &copy
+    <script>
+       document.write(new Date().getFullYear());
+    </script> 
+    <a style="background-color:white ;" href="">Mir Mushaid</a>
+    <script>
+      fetch('http://worldclockapi.com/api/json/utc/now')
+      .then(data => data.json())
+      .then(d => 
+      document.getElementById('copyright').innerHTML = (new Date(d.currentDateTime).getFullYear())
+    )
+    </script>
+    <!-- <a href='https://twiter.com/saviour123>Saviour Gidi<a/> -->
+    </p></section>
+
+</div>
+
 
 </body>
+
 </html>
